@@ -1,0 +1,21 @@
+ const octokit = new Octokit({
+    auth: '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'
+  })
+  
+  const data = await octokit.request('GET /repos/{owner}/{repo}', {
+    owner: 'ayushete02',
+    repo: 'LiveStreamer'
+  })
+     {/* <div class="modal modal--congratulations">
+        <div class="modal-top">
+            <img class="modal-icon u-imgResponsive" src="./medal.png" alt="Trophy" />
+            <div class="modal-header">Congratulations</div>
+            <div class="modal-subheader">You have successfully completed the 100 Days UI Challenge</div>
+        </div>
+        <div class="modal-bottom">
+            <button class="modal-btn u-btn u-btn--share">Share</button>
+            <button class="modal-btn u-btn u-btn--success">Have a beer</button>
+        </div>
+    </div> */}
+
+  console.log(data);

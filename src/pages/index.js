@@ -2,10 +2,20 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
-
+const { Octokit } = require("@octokit/rest");
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default async function Home() {
+
+  const octokit = new Octokit({
+    auth: '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'
+  })
+  
+  const data = await octokit.request('GET /repos/{owner}/{repo}', {
+    owner: 'ayushete02',
+    repo: 'LiveStreamer'
+  })
+  console.log(data['data']['contributors_url'])
   return (
     <>
       <Head>
