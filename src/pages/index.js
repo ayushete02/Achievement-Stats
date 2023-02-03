@@ -4,18 +4,17 @@ import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 const { Octokit } = require("@octokit/rest");
 const inter = Inter({ subsets: ['latin'] })
+import { useRouter } from 'next/router';
 
-export default async function Home() {
 
-  const octokit = new Octokit({
-    auth: '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'
-  })
-  
-  const data = await octokit.request('GET /repos/{owner}/{repo}', {
-    owner: 'ayushete02',
-    repo: 'LiveStreamer'
-  })
-  console.log(data['data']['contributors_url'])
+export default function Home() {
+
+  const router = useRouter();
+
+  const { event,username,repo,desc } = router.query;
+  const query = router.query;
+  const repolink="https://github-readme-stats.vercel.app/api/pin/?username="+username+"&repo="+repo;
+
   return (
     <>
       <Head>
@@ -24,110 +23,24 @@ export default async function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>src/pages/index.js</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
-          </div>
-        </div>
+      <div class="badge m-auto">
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="badge" x="0px" y="0px" width="231px" height="232px" viewBox="0 0 231 232">
+	  <path fill="#1B4557" d="M0.564,186c0-56,0-112,0-168c3.097-9.416,9.598-15.239,19-18c64,0,128,0,192,0c1.519,0.615,3.031,1.247,4.557,1.843   c8.731,3.413,14.26,10.989,14.273,20.359c0.069,53.141,0.034,106.283,0.033,159.424c0,5.824-1.917,11.104-6.551,14.501   c-4.346,3.186-9.21,6.129-14.301,7.751c-17.899,5.7-36.012,10.726-54.009,16.121c-13.028,3.906-26.002,7.993-39.001,12   c-0.667,0-1.333,0-2,0c-1.355-0.572-2.67-1.281-4.072-1.695c-28.84-8.526-57.664-17.111-86.553-25.468   C13.405,201.789,4.662,196.866,0.564,186z"/>
+  </svg>
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="trumpets" x="0px" y="0px" width="212px" height="54.5px" viewBox="0 0 212 54.5">
+    <path fill="#DC514E" xmlns="http://www.w3.org/2000/svg" d="M195.395,1.189c-0.943,0.516-1.22,2.006-0.89,3.918c-7.007,3.579-13.249,6.677-20.636,10.242    c-0.555,0.122-1.072,0.371-1.514,0.729c-0.598,0.288-1.2,0.577-1.808,0.869c-0.875,0.079-1.689,0.468-2.301,1.102    c-0.287,0.137-0.575,0.275-0.865,0.414c-0.681,0.112-1.32,0.417-1.837,0.875c-0.457,0.217-0.918,0.437-1.384,0.658    c-1.075,0.011-2.091,0.493-2.779,1.32c-0.428,0.203-0.859,0.408-1.295,0.614c-1.277-0.089-2.503,0.492-3.241,1.535l-0.05,0.024    c-1.365-0.144-2.7,0.495-3.448,1.632c-1.09,0.516-2.209,1.044-3.358,1.588c-10.132,4.791-22.742,10.755-39.564,18.79l-1.336,0.639    l-5.37,4.424c0.655,1.475,3.61,0.657,5.294,0.283c0.148,0.061,0.304,0.108,0.468,0.138c1.003,0.182,1.974-0.317,2.437-1.165    l0.032-0.013l0.837-0.4c3.983-1.904,18.909-8.344,43.179-18.63c1.298,0.158,2.584-0.393,3.366-1.427    c0.081-0.034,0.162-0.068,0.243-0.103c1.17,0.084,2.31-0.398,3.065-1.297l1.272-0.538l0.197-0.083    c1.049,0.026,2.065-0.404,2.78-1.175l0.967-0.409c1.074,0.037,2.11-0.401,2.834-1.197l0.78-0.329    c0.577-0.094,1.12-0.323,1.591-0.672c0.777-0.328,1.546-0.652,2.305-0.973l0.239-0.101c0.326-0.087,0.638-0.218,0.928-0.391    c10.424-4.397,18.857-7.941,21.774-9.166c1.777,2.087,3.686,3.147,4.869,2.5c1.658-0.907,1.26-4.826-0.889-8.755    C200.139,2.73,197.053,0.282,195.395,1.189z"/><path fill="#DC514E" xmlns="http://www.w3.org/2000/svg" d="M11.732,1.189c0.943,0.516,1.22,2.006,0.89,3.918c7.007,3.579,13.249,6.677,20.636,10.242     c0.555,0.122,1.072,0.371,1.514,0.729c0.598,0.288,1.2,0.577,1.808,0.869c0.875,0.079,1.689,0.468,2.301,1.102     c0.287,0.137,0.575,0.275,0.865,0.414c0.681,0.112,1.32,0.417,1.837,0.875c0.457,0.217,0.918,0.437,1.384,0.658     c1.075,0.011,2.091,0.493,2.779,1.32c0.428,0.203,0.859,0.408,1.295,0.614c1.277-0.089,2.503,0.492,3.241,1.535l0.05,0.024     c1.365-0.144,2.7,0.495,3.448,1.632c1.09,0.516,2.209,1.044,3.358,1.588C67.27,31.501,79.88,37.464,96.702,45.5l1.336,0.639     l5.37,4.424c-0.655,1.475-3.61,0.657-5.294,0.283c-0.148,0.061-0.304,0.108-0.468,0.138c-1.003,0.182-1.974-0.317-2.437-1.165     l-0.032-0.013l-0.837-0.4C90.356,47.5,75.43,41.06,51.161,30.774c-1.298,0.158-2.584-0.393-3.366-1.427     c-0.081-0.034-0.162-0.068-0.243-0.103c-1.17,0.084-2.31-0.398-3.065-1.297l-1.272-0.538l-0.197-0.083     c-1.049,0.026-2.065-0.404-2.78-1.175l-0.967-0.409c-1.074,0.037-2.11-0.401-2.834-1.197l-0.78-0.329     c-0.577-0.094-1.121-0.323-1.591-0.672c-0.777-0.328-1.546-0.652-2.305-0.973l-0.239-0.101c-0.326-0.087-0.638-0.218-0.928-0.391     C20.17,17.682,11.737,14.138,8.82,12.913c-1.777,2.087-3.686,3.147-4.869,2.5c-1.658-0.907-1.26-4.826,0.889-8.755     C6.988,2.73,10.074,0.282,11.732,1.189z"/>
+  </svg>
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="cup" x="0px" y="0px" width="85px" height="95px" viewBox="0 0 85 95">
+	<path fill="#DC514E" d="M85,6.922c0,7.956,0,15.913,0,23.869c-0.07,0.426-0.171,0.848-0.205,1.278c-0.272,3.389-0.945,6.674-2.191,9.78   c-3.774,9.408-10.547,14.47-19.352,16.518c-0.749,0.174-1.245,0.514-1.717,1.2c-3.217,4.671-7.118,8.309-12.342,9.845   c-0.622,0.183-0.724,0.585-0.72,1.216c0.021,2.823,0.035,5.647-0.011,8.47c-0.014,0.861,0.235,1.217,0.985,1.484   c4.7,1.676,8.812,4.399,11.94,8.756c1.189,1.656,2.185,3.436,2.256,5.662c-14.095,0-28.191,0-42.286,0   c0.157-2.892,1.639-5.034,3.299-7.02c3.032-3.629,6.791-5.972,11.002-7.442c0.581-0.203,0.889-0.432,0.878-1.208   c-0.044-2.941,0.008-5.884-0.05-8.825c-0.007-0.373-0.391-0.973-0.699-1.068c-4.549-1.4-8.312-4.21-11.155-8.322   c-1.358-1.964-2.96-2.692-4.968-3.311C9.874,54.787,3.367,47.977,0.914,36.759C0.486,34.804,0.298,32.782,0,30.791   c0-7.956,0-15.913,0-23.869c5.058,0,10.115,0,15.163,0c0-2.49,0-4.706,0-6.922c18.224,0,36.449,0,54.673,0c0,2.245,0,4.49,0,6.86   c0.452,0,0.833-0.001,1.215,0C75.701,6.881,80.351,6.901,85,6.922z M69.81,13.511c-0.306,12.309,1.046,24.705-3.051,36.576   c4.007-1.712,7.516-3.93,9.753-8.055c1.826-3.367,2.484-7.075,2.507-10.945c0.033-5.526,0.01-11.053,0.007-16.579   c0-0.306-0.045-0.612-0.076-0.997C75.891,13.511,72.886,13.511,69.81,13.511z M6.124,13.514c0,6.832-0.166,13.512,0.053,20.176   c0.175,5.337,2.291,9.78,6.196,13.017c1.763,1.462,3.666,2.645,5.977,3.507c-0.206-0.708-0.38-1.173-0.476-1.656   c-0.753-3.79-1.823-7.548-2.153-11.385c-0.456-5.285-0.37-10.631-0.475-15.952c-0.051-2.537-0.009-5.077-0.009-7.707   C12.122,13.514,9.118,13.514,6.124,13.514z"/>
+</svg>
+  <p class='title'>{event}</p>
+  <p class='subtitle animate'>{desc}</p>
+  <div class="w-[231px]">
+  <iframe src={repolink} className="w-full" frameborder="0"></iframe>
+  </div>
+</div>
 
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-          <div className={styles.thirteen}>
-            <Image
-              src="/thirteen.svg"
-              alt="13"
-              width={40}
-              height={31}
-              priority
-            />
-          </div>
-        </div>
 
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
     </>
   )
 }
